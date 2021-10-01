@@ -1,74 +1,56 @@
-main() {
-  // var i = Amer('ahmed');
-  // Amer.bbb();
-  // Gazl('amer');
-  print(Point(10.2,3.2).x);
-}
+import 'dart:convert';
 
-class Amer {
-  String r = 'gazl';
-  Amer(this.r);
-  Amer.bbb() {
-    print(this.r);
-    print(r);
+import 'package:http/http.dart' as http;
+
+main() async {
+  List t = await git_ahmed();
+  Map m = t[4];
+  Map inmap = m['games'][0];
+  print(inmap['type']);
+  for (Map i in t) {
+    print(i['games']);
   }
 }
 
-class Point {
-  double x = 0;
-  double y = 0;
+Future git_ahmed() async {
+  final response =
+      await http.get(Uri.parse('https://sajad2021.herokuapp.com/Catgs'));
+  return jsonDecode(response.body);
+}
 
-  Point(double x, double y) {
-    // There's a better way to do this, stay tuned.
-    this.x = x;
-    this.y = y;
+// var m = await fetchAlbum();
+// print(m.title);
+class Album {
+  final int userId;
+  final int id;
+  final String title;
+
+  Album({
+    required this.userId,
+    required this.id,
+    required this.title,
+  });
+
+  factory Album.fromJson(Map<String, dynamic> json) {
+    return Album(
+      userId: json['userId'],
+      id: json['id'],
+      title: json['title'],
+    );
   }
 }
 
-class Gazl {
-  Gazl(String name) {
-    print(name);
-  }
-}
+Future<Album> fetchAlbum() async {
+  final response = await http
+      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/2'));
 
-/*
-  var now =
-      'طلب نشرمطلوب موظفة مبيعاتلشركه بيت القصيد لهندسة الديكوراوقات الدوام من الساعه ١٠ صباحا حتى ٥ مساءا المطلوب هو متابعه حاسبة الشركة من حيث الوصولات للزبائن وجرد المواد وغيرهاالافضلية لسكنه شارع ١٤ تموز او شارع المقاولينالتواصل عبر الارقام المبينة بالصورة المرفقة';
-  var ahmed = 'ahmed amer sjad braa gazal';
-  print(GetTypeJobs(now,'عبر'));
-
-  var string = 'Dart strings';
-  print(now.contains('مطلوب')); // true
-  print(string.contains(RegExp(r'[A-Z]'))); // true
-  print(ahmed.contains(RegExp(r'[ا-ي]'))); // false
-  string.contains('X', 1); // false
-  string.contains(RegExp(r'[A-Z]'), 1); // false
-*/
-Map GetTypeJobs(list, typeJo) {
-  var typeJobe = {};
-  if (list.contains(typeJo)) {
-    typeJobe['type'] = typeJo;
-    print(typeJo);
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return Album.fromJson(jsonDecode(response.body));
   } else {
-    print('No Type Existing');
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load album');
   }
-  return typeJobe;
 }
-
-/*
-  // /hive
- await Hive.init('ahmed');
-  var box = await Hive.openBox('testBox');
-
-  //await box.put('1', '88888888888');
-
-  print('Name: ${box.get('1')}');
-  await box.close();
-*/
-
-//print(now.weekday);
-
-//print('${now.year}/${now.month}/${now.day}');
-
-//print('berlinWallFell:${berlinWallFell}');
-// print('moonLanding:${moonLanding}');
