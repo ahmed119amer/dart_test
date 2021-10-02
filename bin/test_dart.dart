@@ -1,38 +1,37 @@
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
-
 main() async {
-
+  var t = await fetchAlbum();
+  for (var i in t.games) {
+    print(i['name']);
+  }
 }
 
-
-
-// var m = await fetchAlbum();
-// print(m.title);
 class Album {
-  final int userId;
-  final int id;
-  final String title;
+  final String name;
+  final String id;
+  final List games;
 
   Album({
-    required this.userId,
+    required this.name,
     required this.id,
-    required this.title,
+    required this.games,
   });
+
 
   factory Album.fromJson(Map<String, dynamic> json) {
     return Album(
-      userId: json['userId'],
+      name: json['name'],
       id: json['id'],
-      title: json['title'],
+      games: json['games'],
     );
   }
 }
 
 Future<Album> fetchAlbum() async {
-  final response = await http
-      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/2'));
+  final response = await http.get(Uri.parse(
+      'https://sajad2021.herokuapp.com/Catgs/6155dfe58daa690016fdf896'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
