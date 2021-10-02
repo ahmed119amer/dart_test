@@ -3,9 +3,10 @@ import 'dart:convert';
 
 main() async {
   var t = await fetchAlbum();
-  for (var i in t.games) {
-    print(i['name']);
-  }
+  print(t.games[0]['image']['formats']['small']['url']);
+  // for (var i in t.games) {
+  //   print(i['name']);
+  // }
 }
 
 class Album {
