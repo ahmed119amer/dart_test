@@ -12,8 +12,8 @@ import 'package:http/http.dart' as http;
   //   print(i['name']);
   // }
 
-Future git_ahmed() async {
+Future git_ahmed(String url) async {
   final response =
-      await http.get(Uri.parse('https://sajad2021.herokuapp.com/Catgs'));
+      await http.get(Uri.parse(url));
   return jsonDecode(response.body);
 }
