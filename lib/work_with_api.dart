@@ -2,6 +2,13 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+// in main 
+
+  // await postData('http://localhost:1337/Games');
+
+  // await updateData('http://localhost:1337/Games/6159e86c6248be24bc1bf922');
+  // await DeleteData('http://localhost:1337/Games/6159e86c6248be24bc1bf922');
+
 Future<void> postData(String url) async {
   try {
     final response = await http.post(Uri.parse(url), headers: {

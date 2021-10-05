@@ -1,5 +1,12 @@
-void hive_DB() {
-  print('ahmed!!!!');
+import 'package:hive/hive.dart';
+
+Future<void> hive_DB() async {
+  var box = await Hive.openBox('ahmed');
+  
+  await box.put('name', 'David');
+  
+  print('Name: ${box.get('name')}');
+  // print('ahmed!!!!');
 }
 
 
