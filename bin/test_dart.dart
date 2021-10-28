@@ -1,5 +1,5 @@
-import 'package:test_dart/hive.dart';
+import 'dart:math';
 
-void main() async {
-  await HiveDB();
+void main() {
+ 
 }

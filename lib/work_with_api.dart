@@ -56,3 +56,22 @@ Future<void> DeleteData(String url) async {
     print(e);
   }
 }
+
+
+
+/// Available_resolution in json
+Available_resolution(u) {
+  if (u['Iarge'] != null) {
+    // print('Iarge');
+    return u['Iarge']['url'];
+  } else if (u['medium'] != null) {
+    // print('medium');
+    return u['medium']['url'];
+  } else if (u['small'] != null) {
+    // print('small');
+    return u['small']['url'];
+  } else {
+    // print('thumbnail');
+    return u['thumbnail']['url'];
+  }
+}

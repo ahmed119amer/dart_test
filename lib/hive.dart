@@ -12,8 +12,40 @@ Future<void> HiveDB() async {
   var box = Hive.box('myDir');
 
   await box.put('name', ['ahmed', 'amer']);
+  // await box.put('name', null);
+  // print(box.containsKey('key'));
 
-  var name = box.get('name');
+  await box.delete('name');
+  // print(box.containsKey('key'));
+  print(box.get('name'));
+}
 
-  print('Name: ${name[0]}');
+/// write on hive
+void HiveWrite(String kay, dynamic value) async {
+  var myDir = Directory('hivePath');
+  Hive.init(myDir.path);
+  await Hive.openBox('hivedb');
+  var box = Hive.box('hivedb');
+  await box.put(kay, value);
+  print(box.get(kay));
+}
+
+/// read in hive
+Future<void> HiveRead(String kay) async {
+  var myDir = Directory('hivePath');
+  Hive.init(myDir.path);
+  await Hive.openBox('hivedb');
+  var box = Hive.box('hivedb');
+  print(box.get(kay));
+}
+
+/// delete kay hive
+Future<void> HiveDelete(String kay) async {
+  var myDir = Directory('hivePath');
+  Hive.init(myDir.path);
+  await Hive.openBox('hivedb');
+  var box = Hive.box('hivedb');
+  await box.delete(kay);
+  // print(box.containsKey('key'));
+  print(box.get(kay));
 }
