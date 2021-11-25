@@ -1,14 +1,6 @@
-main() async {
-  // ignore: omit_local_variable_types
-  bool r = await kappa(true);
-  print('object : ${await r}');
-  // print(await foo(await r));
-  // GGG(r);
-}
-
-
-Future<bool> kappa(u) async {
-  await Future.delayed(Duration(seconds: 1));
+Future<String> kappa(u) async {
+  second(3);
+  await Future.delayed(Duration(seconds: 3));
   return u;
 }
 
@@ -20,4 +12,11 @@ Future<bool> foo(Future<bool> f) async {
 GGG(Future<bool> r) async {
   var y = await r;
   print('DDDD : $y');
+}
+
+Future second(timeSecend) async {
+  for (var i = 1; i <= timeSecend; i++) {
+    await Future.delayed(Duration(seconds: 1));
+    print(i);
+  }
 }

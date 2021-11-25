@@ -21,7 +21,7 @@ Future<void> HiveDB() async {
 }
 
 /// write on hive
-void HiveWrite(String kay, dynamic value) async {
+Future HiveWrite(String kay, dynamic value) async {
   var myDir = Directory('hivePath');
   Hive.init(myDir.path);
   await Hive.openBox('hivedb');
@@ -31,12 +31,17 @@ void HiveWrite(String kay, dynamic value) async {
 }
 
 /// read in hive
-Future<void> HiveRead(String kay) async {
+Future<List> HiveRead(String kay) async {
   var myDir = Directory('hivePath');
   Hive.init(myDir.path);
   await Hive.openBox('hivedb');
   var box = Hive.box('hivedb');
   print(box.get(kay));
+  if (box.get(kay) == null) {
+    return [];
+  } else {
+    return box.get(kay);
+  }
 }
 
 /// delete kay hive
